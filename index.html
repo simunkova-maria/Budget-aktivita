@@ -11,11 +11,11 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --lime:    #A2E640;
-      --purple:  #67139F;
-      --nøt:     #AD8CCB;
-      --black:   #0E0E0E;
-      --bg:      #f5f0fa;
+      --lime:   #A2E640;
+      --purple: #67139F;
+      --nøt:    #AD8CCB;
+      --black:  #0E0E0E;
+      --bg:     #f5f0fa;
     }
 
     body {
@@ -41,6 +41,7 @@
       display: flex;
       flex-direction: column;
       height: 844px;
+      position: relative;
     }
 
     /* ── Status bar ── */
@@ -64,7 +65,6 @@
       flex-shrink: 0;
     }
 
-    /* ── Bank logo ── */
     .bank-name {
       font-size: 24px;
       font-weight: 900;
@@ -74,10 +74,7 @@
       align-items: center;
       gap: 6px;
     }
-    .bank-name .symbol {
-      color: var(--lime);
-      font-size: 26px;
-    }
+    .bank-name .symbol  { color: var(--lime); font-size: 26px; }
     .bank-name .wordmark { color: #fff; }
 
     /* ── Profile switcher ── */
@@ -107,7 +104,6 @@
       gap: 7px;
       transition: background 0.18s, color 0.18s;
     }
-
     .switcher button.active {
       background: var(--lime);
       color: var(--black);
@@ -128,7 +124,6 @@
       align-items: center;
       gap: 12px;
     }
-
     .av-lg {
       width: 50px; height: 50px;
       border-radius: 50%;
@@ -136,19 +131,8 @@
       font-size: 18px; font-weight: 900;
       flex-shrink: 0;
     }
-
-    .account-card h2 {
-      font-size: 18px;
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.2;
-    }
-    .account-card .sub {
-      font-size: 11px;
-      color: rgba(255,255,255,0.45);
-      margin-top: 3px;
-      font-weight: 400;
-    }
+    .account-card h2 { font-size: 18px; font-weight: 800; color: #fff; line-height: 1.2; }
+    .account-card .sub { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 3px; font-weight: 400; }
 
     /* ── Scrollable content ── */
     .content {
@@ -157,7 +141,6 @@
       -webkit-overflow-scrolling: touch;
       background: #faf8fd;
     }
-
     .content::-webkit-scrollbar { width: 0; }
 
     /* ── Month label ── */
@@ -168,17 +151,11 @@
       padding: 14px 20px 6px;
     }
     .month-label h3 {
-      font-size: 11px;
-      font-weight: 800;
+      font-size: 11px; font-weight: 800;
       color: var(--purple);
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      text-transform: uppercase; letter-spacing: 1px;
     }
-    .month-label .count {
-      font-size: 11px;
-      color: var(--nøt);
-      font-weight: 600;
-    }
+    .month-label .count { font-size: 11px; color: var(--nøt); font-weight: 600; }
 
     /* ── Transaction list ── */
     .tx-list { padding: 0 12px 12px; }
@@ -196,33 +173,15 @@
       width: 42px; height: 42px;
       border-radius: 13px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
+      font-size: 20px; flex-shrink: 0;
     }
-
     .tx-info { flex: 1; min-width: 0; }
-
     .tx-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--black);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: 14px; font-weight: 600; color: var(--black);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-    .tx-date {
-      font-size: 12px;
-      color: var(--nøt);
-      margin-top: 2px;
-      font-weight: 400;
-    }
-
-    .tx-amount {
-      font-size: 15px;
-      font-weight: 800;
-      flex-shrink: 0;
-      letter-spacing: -0.3px;
-    }
+    .tx-date { font-size: 12px; color: var(--nøt); margin-top: 2px; font-weight: 400; }
+    .tx-amount { font-size: 15px; font-weight: 800; flex-shrink: 0; letter-spacing: -0.3px; }
     .tx-amount.in  { color: var(--purple); }
     .tx-amount.out { color: var(--black); }
 
@@ -243,21 +202,201 @@
       font-family: 'Geologica', sans-serif;
       font-size: 10px;
       font-weight: 700;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
     }
     .nav-btn .ico { font-size: 22px; }
     .nav-btn.active { color: var(--lime); }
+    .nav-btn.locked { color: rgba(255,255,255,0.2); cursor: pointer; }
+
+    /* ── Code unlock overlay ── */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(14,14,14,0.85);
+      display: flex;
+      align-items: flex-end;
+      z-index: 100;
+      backdrop-filter: blur(4px);
+      border-radius: 48px;
+      overflow: hidden;
+    }
+    .overlay.hidden { display: none; }
+
+    .code-sheet {
+      width: 100%;
+      background: #1a1a1a;
+      border-radius: 28px 28px 0 0;
+      padding: 28px 24px 40px;
+    }
+    .code-sheet h3 {
+      font-size: 20px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .code-sheet p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 24px;
+      font-weight: 400;
+    }
+
+    .code-input-wrap {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .code-input {
+      flex: 1;
+      background: #2a2a2a;
+      border: 2px solid #3a3a3a;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-family: 'Geologica', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      outline: none;
+      transition: border-color 0.18s;
+    }
+    .code-input:focus { border-color: var(--lime); }
+    .code-input.error { border-color: #ef4444; animation: shake 0.3s; }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25%      { transform: translateX(-6px); }
+      75%      { transform: translateX(6px); }
+    }
+
+    .code-btn {
+      background: var(--lime);
+      border: none;
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-family: 'Geologica', sans-serif;
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--black);
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .code-btn:hover { opacity: 0.88; }
+
+    .code-error {
+      font-size: 13px;
+      color: #ef4444;
+      font-weight: 600;
+      min-height: 18px;
+    }
+
+    .overlay-close {
+      display: block;
+      width: 100%;
+      margin-top: 16px;
+      background: none;
+      border: none;
+      font-family: 'Geologica', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.3);
+      cursor: pointer;
+      text-align: center;
+    }
+
+    /* ── Budget view ── */
+    .budget-view { padding: 16px 20px 24px; }
+
+    .budget-summary {
+      background: var(--black);
+      border-radius: 18px;
+      padding: 18px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 0;
+    }
+    .summary-col {
+      flex: 1;
+      text-align: center;
+    }
+    .summary-col + .summary-col {
+      border-left: 1px solid rgba(255,255,255,0.1);
+    }
+    .summary-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 4px;
+    }
+    .summary-value {
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+    .summary-value.income  { color: var(--lime); }
+    .summary-value.expense { color: var(--nøt); }
+    .summary-value.balance-pos { color: var(--lime); }
+    .summary-value.balance-neg { color: #ef4444; }
+
+    .budget-section-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--purple);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    /* ── Bar chart ── */
+    .bar-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .bar-row { display: flex; flex-direction: column; gap: 4px; }
+
+    .bar-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .bar-cat {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--black);
+    }
+    .bar-amount {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--black);
+    }
+
+    .bar-track {
+      height: 10px;
+      background: rgba(103,19,159,0.1);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width 0.6s cubic-bezier(.4,0,.2,1);
+    }
 
     /* ── Hidden util ── */
     .hidden { display: none !important; }
 
-    /* ── Responsive: full-screen on real phones ── */
+    /* ── Responsive ── */
     @media (max-width: 440px) {
       body { padding: 0; background: #faf8fd; }
       .phone {
         width: 100%; border-radius: 0;
-        box-shadow: none;
-        height: 100dvh;
+        box-shadow: none; height: 100dvh;
       }
+      .overlay { border-radius: 0; }
     }
   </style>
 </head>
@@ -272,14 +411,13 @@
     <span>&#9679;&#9679;&#9679;&#9679;</span>
   </div>
 
-  <!-- App header -->
+  <!-- App header (always visible) -->
   <div class="app-header">
     <div class="bank-name">
       <span class="symbol">ø</span>
       <span class="wordmark">Nekrachni</span>
     </div>
 
-    <!-- Profile switcher -->
     <div class="switcher">
       <button id="tab-tomas" class="active" onclick="switchProfile('tomas')">
         <span class="av av-t">TN</span>Tomáš
@@ -289,7 +427,6 @@
       </button>
     </div>
 
-    <!-- Tomáš info -->
     <div class="account-card" id="info-tomas">
       <div class="av-lg av-t">TN</div>
       <div>
@@ -297,8 +434,6 @@
         <div class="sub">Student VŠE &nbsp;·&nbsp; CZ65 0800 0000 0012 3456 7890</div>
       </div>
     </div>
-
-    <!-- Markéta info -->
     <div class="account-card hidden" id="info-marketa">
       <div class="av-lg av-m">MK</div>
       <div>
@@ -311,8 +446,8 @@
   <!-- Scrollable content -->
   <div class="content">
 
-    <!-- ═══ TOMÁŠ ═══ -->
-    <div id="view-tomas">
+    <!-- ══ POHYBY – Tomáš ══ -->
+    <div id="pohyby-tomas">
       <div class="month-label">
         <h3>Únor 2026</h3>
         <span class="count" id="count-tomas"></span>
@@ -320,8 +455,8 @@
       <div class="tx-list" id="list-tomas"></div>
     </div>
 
-    <!-- ═══ MARKÉTA ═══ -->
-    <div id="view-marketa" class="hidden">
+    <!-- ══ POHYBY – Markéta ══ -->
+    <div id="pohyby-marketa" class="hidden">
       <div class="month-label">
         <h3>Únor 2026</h3>
         <span class="count" id="count-marketa"></span>
@@ -329,21 +464,69 @@
       <div class="tx-list" id="list-marketa"></div>
     </div>
 
+    <!-- ══ ROZPOČET – Tomáš ══ -->
+    <div id="rozpocet-tomas" class="hidden">
+      <div class="budget-view" id="budget-content-tomas"></div>
+    </div>
+
+    <!-- ══ ROZPOČET – Markéta ══ -->
+    <div id="rozpocet-marketa" class="hidden">
+      <div class="budget-view" id="budget-content-marketa"></div>
+    </div>
+
   </div>
 
   <!-- Bottom nav -->
   <div class="bottom-nav">
-    <div class="nav-btn active"><span class="ico">&#128203;</span>Pohyby</div>
-    <div class="nav-btn"><span class="ico">&#128179;</span>Karta</div>
-    <div class="nav-btn"><span class="ico">&#8599;</span>Platba</div>
-    <div class="nav-btn"><span class="ico">&#128100;</span>Profil</div>
+    <button class="nav-btn active" id="nav-pohyby" onclick="switchTab('pohyby')">
+      <span class="ico">&#128203;</span>Pohyby
+    </button>
+    <button class="nav-btn" onclick="">
+      <span class="ico">&#128179;</span>Karta
+    </button>
+    <button class="nav-btn" onclick="">
+      <span class="ico">&#8599;</span>Platba
+    </button>
+    <button class="nav-btn locked" id="nav-rozpocet" onclick="handleRozpocetClick()">
+      <span class="ico">&#128274;</span>Rozpočet
+    </button>
+  </div>
+
+  <!-- Code unlock overlay -->
+  <div class="overlay hidden" id="overlay">
+    <div class="code-sheet">
+      <h3>Zadej kód lektora</h3>
+      <p>Kód najdeš na tabuli nebo v materiálech k workshopu.</p>
+      <div class="code-input-wrap">
+        <input
+          class="code-input"
+          id="code-input"
+          type="text"
+          maxlength="5"
+          placeholder="XXXXX"
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+          oninput="this.value=this.value.toUpperCase()"
+          onkeydown="if(event.key==='Enter') checkCode()"
+        >
+        <button class="code-btn" onclick="checkCode()">OK</button>
+      </div>
+      <div class="code-error" id="code-error"></div>
+      <button class="overlay-close" onclick="closeOverlay()">Zavřít</button>
+    </div>
   </div>
 
 </div>
 
 <script>
-  // ── Data ──────────────────────────────────────────────────────────────────
+  // ── State ─────────────────────────────────────────────────────────────────
+  let activeProfile = 'tomas';
+  let activeTab     = 'pohyby';
+  let unlocked      = false;
+  const SECRET_CODE = 'A4HC8';
 
+  // ── Transaction data ───────────────────────────────────────────────────────
   const TOMAS = [
     { date: "28. 2. 2026", name: "Výplata – kavárna Zlatá Praha", amount:  6800, icon: "💼", bg: "#ede9fe" },
     { date: "27. 2. 2026", name: "Kino Světozor",                 amount:  -189, icon: "🎬", bg: "#f5f0fa" },
@@ -394,19 +577,50 @@
     { date: "1.  2. 2026", name: "Nájem – únor",                  amount: -11500, icon: "🏠", bg: "#f5f0fa" },
   ];
 
-  // ── Render ────────────────────────────────────────────────────────────────
+  // ── Budget data ────────────────────────────────────────────────────────────
+  const BUDGET = {
+    tomas: {
+      income:  12300,
+      expense: 11864,
+      cats: [
+        { name: "Bydlení",          amount: 5500, color: "#67139F" },
+        { name: "Potraviny",        amount: 2235, color: "#A2E640" },
+        { name: "Zábava",           amount: 1157, color: "#AD8CCB" },
+        { name: "Oblečení",         amount:  699, color: "#c084fc" },
+        { name: "Vzdělání",         amount:  474, color: "#818cf8" },
+        { name: "Doprava",          amount:  550, color: "#60a5fa" },
+        { name: "Stravování venku", amount:  415, color: "#f97316" },
+        { name: "Telefon",          amount:  399, color: "#34d399" },
+        { name: "Dárky",            amount:  250, color: "#f472b6" },
+        { name: "Zdraví",           amount:  185, color: "#fb923c" },
+      ]
+    },
+    marketa: {
+      income:  23500,
+      expense: 23625,
+      cats: [
+        { name: "Bydlení",            amount: 13300, color: "#67139F" },
+        { name: "Potraviny",          amount:  3500, color: "#A2E640" },
+        { name: "Oblečení",           amount:  1290, color: "#c084fc" },
+        { name: "Zdraví & krása",     amount:  1160, color: "#AD8CCB" },
+        { name: "Stravování venku",   amount:  1110, color: "#f97316" },
+        { name: "Telefon & internet", amount:  1148, color: "#34d399" },
+        { name: "Sport",              amount:   799, color: "#818cf8" },
+        { name: "Zábava",             amount:   768, color: "#60a5fa" },
+        { name: "Doprava",            amount:   550, color: "#f472b6" },
+      ]
+    }
+  };
 
+  // ── Helpers ────────────────────────────────────────────────────────────────
   function fmt(n) {
     return Math.abs(n).toLocaleString('cs-CZ') + '\u00a0Kč';
   }
 
-  function render(data, listId, countId) {
-    const list  = document.getElementById(listId);
-    const count = document.getElementById(countId);
-
-    count.textContent = data.length + ' pohybů';
-
-    list.innerHTML = data.map(tx => `
+  // ── Render transactions ────────────────────────────────────────────────────
+  function renderTx(data, listId, countId) {
+    document.getElementById(countId).textContent = data.length + ' pohybů';
+    document.getElementById(listId).innerHTML = data.map(tx => `
       <div class="tx">
         <div class="tx-icon" style="background:${tx.bg}">${tx.icon}</div>
         <div class="tx-info">
@@ -420,27 +634,131 @@
     `).join('');
   }
 
-  // ── Switch ────────────────────────────────────────────────────────────────
+  // ── Render budget ──────────────────────────────────────────────────────────
+  function renderBudget(profile) {
+    const b       = BUDGET[profile];
+    const balance = b.income - b.expense;
+    const maxAmt  = Math.max(...b.cats.map(c => c.amount));
+    const balClass = balance >= 0 ? 'balance-pos' : 'balance-neg';
+    const balSign  = balance >= 0 ? '+' : '−';
 
-  function switchProfile(who) {
-    const isT = who === 'tomas';
+    const bars = b.cats.map(c => {
+      const pct = Math.round((c.amount / maxAmt) * 100);
+      return `
+        <div class="bar-row">
+          <div class="bar-meta">
+            <span class="bar-cat">${c.name}</span>
+            <span class="bar-amount">${fmt(c.amount)}</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:${pct}%; background:${c.color}"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
 
-    document.getElementById('tab-tomas').classList.toggle('active', isT);
-    document.getElementById('tab-marketa').classList.toggle('active', !isT);
+    document.getElementById(`budget-content-${profile}`).innerHTML = `
+      <div class="budget-summary">
+        <div class="summary-col">
+          <div class="summary-label">Příjmy</div>
+          <div class="summary-value income">+${fmt(b.income)}</div>
+        </div>
+        <div class="summary-col">
+          <div class="summary-label">Výdaje</div>
+          <div class="summary-value expense">−${fmt(b.expense)}</div>
+        </div>
+        <div class="summary-col">
+          <div class="summary-label">Zůstatek</div>
+          <div class="summary-value ${balClass}">${balSign}${fmt(Math.abs(balance))}</div>
+        </div>
+      </div>
+      <div class="budget-section-title">Výdaje podle kategorií</div>
+      <div class="bar-list">${bars}</div>
+    `;
+  }
 
-    document.getElementById('info-tomas').classList.toggle('hidden', !isT);
-    document.getElementById('info-marketa').classList.toggle('hidden', isT);
+  // ── Show/hide panels ───────────────────────────────────────────────────────
+  function updateView() {
+    const profiles = ['tomas', 'marketa'];
+    const tabs     = ['pohyby', 'rozpocet'];
 
-    document.getElementById('view-tomas').classList.toggle('hidden', !isT);
-    document.getElementById('view-marketa').classList.toggle('hidden', isT);
+    profiles.forEach(p => {
+      tabs.forEach(t => {
+        const el = document.getElementById(`${t}-${p}`);
+        if (el) el.classList.toggle('hidden',
+          !(p === activeProfile && t === activeTab));
+      });
+    });
+
+    document.getElementById('info-tomas').classList.toggle('hidden',   activeProfile !== 'tomas');
+    document.getElementById('info-marketa').classList.toggle('hidden', activeProfile !== 'marketa');
+
+    document.getElementById('tab-tomas').classList.toggle('active',   activeProfile === 'tomas');
+    document.getElementById('tab-marketa').classList.toggle('active', activeProfile === 'marketa');
+
+    document.getElementById('nav-pohyby').classList.toggle('active',  activeTab === 'pohyby');
+
+    const navR = document.getElementById('nav-rozpocet');
+    navR.classList.toggle('active',  unlocked && activeTab === 'rozpocet');
+    navR.classList.toggle('locked',  !unlocked);
+    navR.innerHTML = unlocked
+      ? '<span class="ico">&#128200;</span>Rozpočet'
+      : '<span class="ico">&#128274;</span>Rozpočet';
 
     document.querySelector('.content').scrollTop = 0;
   }
 
-  // ── Init ──────────────────────────────────────────────────────────────────
+  // ── Switch profile ─────────────────────────────────────────────────────────
+  function switchProfile(profile) {
+    activeProfile = profile;
+    updateView();
+  }
 
-  render(TOMAS,   'list-tomas',   'count-tomas');
-  render(MARKETA, 'list-marketa', 'count-marketa');
+  // ── Switch tab ─────────────────────────────────────────────────────────────
+  function switchTab(tab) {
+    activeTab = tab;
+    updateView();
+  }
+
+  // ── Rozpočet click ─────────────────────────────────────────────────────────
+  function handleRozpocetClick() {
+    if (unlocked) {
+      switchTab('rozpocet');
+    } else {
+      document.getElementById('overlay').classList.remove('hidden');
+      document.getElementById('code-input').value = '';
+      document.getElementById('code-error').textContent = '';
+      setTimeout(() => document.getElementById('code-input').focus(), 100);
+    }
+  }
+
+  // ── Code check ─────────────────────────────────────────────────────────────
+  function checkCode() {
+    const input = document.getElementById('code-input');
+    const error = document.getElementById('code-error');
+
+    if (input.value.trim() === SECRET_CODE) {
+      unlocked = true;
+      document.getElementById('overlay').classList.add('hidden');
+      activeTab = 'rozpocet';
+      updateView();
+    } else {
+      error.textContent = 'Nesprávný kód. Zkus to znovu.';
+      input.classList.add('error');
+      setTimeout(() => input.classList.remove('error'), 400);
+    }
+  }
+
+  function closeOverlay() {
+    document.getElementById('overlay').classList.add('hidden');
+  }
+
+  // ── Init ───────────────────────────────────────────────────────────────────
+  renderTx(TOMAS,   'list-tomas',   'count-tomas');
+  renderTx(MARKETA, 'list-marketa', 'count-marketa');
+  renderBudget('tomas');
+  renderBudget('marketa');
+  updateView();
 </script>
 </body>
 </html>
