@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlexBank – Přehled pohybů</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #e8edf5;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 32px 16px 48px;
+    }
+
+    /* ── Phone shell ── */
+    .phone {
+      width: 390px;
+      background: #f9fafb;
+      border-radius: 48px;
+      box-shadow:
+        0 0 0 10px #1c1c1e,
+        0 0 0 12px #3a3a3c,
+        0 32px 80px rgba(0,0,0,0.35);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 844px;
+    }
+
+    /* ── Status bar ── */
+    .status-bar {
+      background: #0f2d6b;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 28px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    /* ── App header ── */
+    .app-header {
+      background: linear-gradient(150deg, #0f2d6b 0%, #1d4ed8 100%);
+      padding: 14px 20px 20px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .bank-name {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+    }
+    .bank-name em { color: #93c5fd; font-style: normal; }
+
+    /* ── Profile switcher ── */
+    .switcher {
+      display: flex;
+      background: rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 4px;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+
+    .switcher button {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.65);
+      border-radius: 10px;
+      padding: 9px 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      transition: background 0.18s, color 0.18s;
+    }
+
+    .switcher button.active {
+      background: #fff;
+      color: #0f2d6b;
+    }
+
+    .av {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 800;
+    }
+    .av-t { background: #fbbf24; color: #78350f; }
+    .av-m { background: #f472b6; color: #831843; }
+
+    /* ── Account card ── */
+    .account-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .av-lg {
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .account-card h2 {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .account-card .sub {
+      font-size: 11px;
+      opacity: 0.65;
+      margin-top: 3px;
+    }
+
+    /* ── Scrollable content ── */
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .content::-webkit-scrollbar { width: 0; }
+
+    /* ── Month label ── */
+    .month-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px 6px;
+    }
+    .month-label h3 {
+      font-size: 11px;
+      font-weight: 700;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .month-label .count {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    /* ── Transaction list ── */
+    .tx-list { padding: 0 12px 12px; }
+
+    .tx {
+      display: flex;
+      align-items: center;
+      padding: 11px 8px;
+      border-bottom: 1px solid #f0f0f0;
+      gap: 12px;
+    }
+    .tx:last-child { border-bottom: none; }
+
+    .tx-icon {
+      width: 42px; height: 42px;
+      border-radius: 13px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .tx-info { flex: 1; min-width: 0; }
+
+    .tx-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #111827;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .tx-date {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 2px;
+    }
+
+    .tx-amount {
+      font-size: 15px;
+      font-weight: 700;
+      flex-shrink: 0;
+      letter-spacing: -0.3px;
+    }
+    .tx-amount.in  { color: #059669; }
+    .tx-amount.out { color: #dc2626; }
+
+    /* ── Bottom nav ── */
+    .bottom-nav {
+      flex-shrink: 0;
+      background: #fff;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0 22px;
+    }
+    .nav-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: #9ca3af;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .nav-btn .ico { font-size: 22px; }
+    .nav-btn.active { color: #1d4ed8; }
+
+    /* ── Hidden util ── */
+    .hidden { display: none !important; }
+
+    /* ── Responsive: full-screen on real phones ── */
+    @media (max-width: 440px) {
+      body { padding: 0; background: #f9fafb; }
+      .phone {
+        width: 100%; border-radius: 0;
+        box-shadow: none;
+        height: 100dvh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="phone">
+
+  <!-- Status bar -->
+  <div class="status-bar">
+    <span>9:41</span>
+    <span>FlexBank</span>
+    <span>&#9679;&#9679;&#9679;&#9679;</span>
+  </div>
+
+  <!-- App header -->
+  <div class="app-header">
+    <div class="bank-name">Flex<em>Bank</em></div>
+
+    <!-- Profile switcher -->
+    <div class="switcher">
+      <button id="tab-tomas" class="active" onclick="switchProfile('tomas')">
+        <span class="av av-t">TN</span>Tomáš
+      </button>
+      <button id="tab-marketa" onclick="switchProfile('marketa')">
+        <span class="av av-m">MK</span>Markéta
+      </button>
+    </div>
+
+    <!-- Tomáš info -->
+    <div class="account-card" id="info-tomas">
+      <div class="av-lg av-t">TN</div>
+      <div>
+        <h2>Tomáš Novák</h2>
+        <div class="sub">Student VŠE &nbsp;·&nbsp; CZ65 0800 0000 0012 3456 7890</div>
+      </div>
+    </div>
+
+    <!-- Markéta info -->
+    <div class="account-card hidden" id="info-marketa">
+      <div class="av-lg av-m">MK</div>
+      <div>
+        <h2>Markéta Kovářová</h2>
+        <div class="sub">Admin. pracovnice &nbsp;·&nbsp; CZ65 0800 0000 0098 7654 3210</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scrollable content -->
+  <div class="content">
+
+    <!-- ═══ TOMÁŠ ═══ -->
+    <div id="view-tomas">
+      <div class="month-label">
+        <h3>Únor 2026</h3>
+        <span class="count" id="count-tomas"></span>
+      </div>
+      <div class="tx-list" id="list-tomas"></div>
+    </div>
+
+    <!-- ═══ MARKÉTA ═══ -->
+    <div id="view-marketa" class="hidden">
+      <div class="month-label">
+        <h3>Únor 2026</h3>
+        <span class="count" id="count-marketa"></span>
+      </div>
+      <div class="tx-list" id="list-marketa"></div>
+    </div>
+
+  </div>
+
+  <!-- Bottom nav -->
+  <div class="bottom-nav">
+    <div class="nav-btn active"><span class="ico">&#128203;</span>Pohyby</div>
+    <div class="nav-btn"><span class="ico">&#128179;</span>Karta</div>
+    <div class="nav-btn"><span class="ico">&#8599;</span>Platba</div>
+    <div class="nav-btn"><span class="ico">&#128100;</span>Profil</div>
+  </div>
+
+</div>
+
+<script>
+  // ── Data ──────────────────────────────────────────────────────────────────
+
+  const TOMAS = [
+    // Sorted: newest first (28. 2. → 1. 2.)
+    { date: "28. 2. 2026", name: "Výplata – kavárna Zlatá Praha", amount:  6800, icon: "💼", bg: "#dcfce7" },
+    { date: "27. 2. 2026", name: "Kino Světozor",                 amount:  -189, icon: "🎬", bg: "#fef9c3" },
+    { date: "26. 2. 2026", name: "H&M – oblečení",                amount:  -699, icon: "👕", bg: "#ede9fe" },
+    { date: "25. 2. 2026", name: "Lidl – potraviny",              amount:  -290, icon: "🛒", bg: "#fef9c3" },
+    { date: "24. 2. 2026", name: "Tisk – školní práce",           amount:   -75, icon: "🖨️", bg: "#f3f4f6" },
+    { date: "22. 2. 2026", name: "Bar Na Příkopě",                amount:  -580, icon: "🍺", bg: "#fef9c3" },
+    { date: "20. 2. 2026", name: "Albert – potraviny",            amount:  -610, icon: "🛒", bg: "#fef9c3" },
+    { date: "19. 2. 2026", name: "Kavárna Louvre",                amount:   -95, icon: "☕", bg: "#fef9c3" },
+    { date: "17. 2. 2026", name: "Martinus.cz – knihy",           amount:  -399, icon: "📚", bg: "#ede9fe" },
+    { date: "15. 2. 2026", name: "Lidl – potraviny",              amount:  -430, icon: "🛒", bg: "#fef9c3" },
+    { date: "14. 2. 2026", name: "Florea – květiny",              amount:  -250, icon: "💐", bg: "#fce7f3" },
+    { date: "12. 2. 2026", name: "Lékárna Benu",                  amount:  -185, icon: "💊", bg: "#dcfce7" },
+    { date: "11. 2. 2026", name: "Netflix",                       amount:  -239, icon: "🎬", bg: "#f3f4f6" },
+    { date: "10. 2. 2026", name: "Spotify",                       amount:  -149, icon: "🎵", bg: "#dcfce7" },
+    { date: "8.  2. 2026", name: "Restaurace Na Příkopě",         amount:  -320, icon: "🍽️", bg: "#fef9c3" },
+    { date: "7.  2. 2026", name: "Albert – potraviny",            amount:  -520, icon: "🛒", bg: "#fef9c3" },
+    { date: "6.  2. 2026", name: "O2 – mobilní tarif",            amount:  -399, icon: "📱", bg: "#dbeafe" },
+    { date: "4.  2. 2026", name: "Lidl – potraviny",              amount:  -385, icon: "🛒", bg: "#fef9c3" },
+    { date: "3.  2. 2026", name: "MHD – měsíční jízdenka",        amount:  -550, icon: "🚌", bg: "#dbeafe" },
+    { date: "3.  2. 2026", name: "Převod od rodičů",              amount:  3000, icon: "👨‍👩‍👦", bg: "#dcfce7" },
+    { date: "1.  2. 2026", name: "Nájem – únor",                  amount: -5500, icon: "🏠", bg: "#fef9c3" },
+    { date: "1.  2. 2026", name: "Stipendium VŠE",                amount:  4500, icon: "🎓", bg: "#dcfce7" },
+  ];
+
+  const MARKETA = [
+    { date: "28. 2. 2026", name: "Lidl – potraviny",              amount:   -520, icon: "🛒", bg: "#fef9c3" },
+    { date: "27. 2. 2026", name: "Notino – kosmetika",            amount:   -590, icon: "💄", bg: "#fce7f3" },
+    { date: "26. 2. 2026", name: "CineStar – kino",               amount:   -380, icon: "🎬", bg: "#fef9c3" },
+    { date: "25. 2. 2026", name: "Oběd – restaurace Radost",      amount:   -145, icon: "🍽️", bg: "#fef9c3" },
+    { date: "21. 2. 2026", name: "PID Lítačka – MHD",             amount:   -550, icon: "🚌", bg: "#dbeafe" },
+    { date: "20. 2. 2026", name: "Reserved – oblečení",           amount:  -1290, icon: "👗", bg: "#ede9fe" },
+    { date: "19. 2. 2026", name: "Lékař – poplatek",              amount:    -90, icon: "🏥", bg: "#dcfce7" },
+    { date: "18. 2. 2026", name: "Oběd – restaurace Radost",      amount:   -155, icon: "🍽️", bg: "#fef9c3" },
+    { date: "17. 2. 2026", name: "Lidl – potraviny",              amount:   -890, icon: "🛒", bg: "#fef9c3" },
+    { date: "15. 2. 2026", name: "Netflix",                       amount:   -239, icon: "🎬", bg: "#f3f4f6" },
+    { date: "14. 2. 2026", name: "Restaurace Aromi – Valentýn",   amount:   -680, icon: "🍽️", bg: "#fce7f3" },
+    { date: "13. 2. 2026", name: "Spotify",                       amount:   -149, icon: "🎵", bg: "#dcfce7" },
+    { date: "12. 2. 2026", name: "DM drogerie",                   amount:   -480, icon: "🧴", bg: "#fce7f3" },
+    { date: "11. 2. 2026", name: "FitLife gym – únor",            amount:   -799, icon: "💪", bg: "#dbeafe" },
+    { date: "10. 2. 2026", name: "Oběd – restaurace Radost",      amount:   -130, icon: "🍽️", bg: "#fef9c3" },
+    { date: "7.  2. 2026", name: "Tesco – potraviny",             amount:  -1340, icon: "🛒", bg: "#fef9c3" },
+    { date: "6.  2. 2026", name: "T-Mobile – telefon",            amount:   -649, icon: "📱", bg: "#dbeafe" },
+    { date: "5.  2. 2026", name: "Výplata – leden 2026",          amount:  23500, icon: "💼", bg: "#dcfce7" },
+    { date: "5.  2. 2026", name: "O2 – internet domácí",          amount:   -499, icon: "🌐", bg: "#dbeafe" },
+    { date: "3.  2. 2026", name: "Rohlík.cz – potraviny",         amount:   -750, icon: "🛒", bg: "#fef9c3" },
+    { date: "1.  2. 2026", name: "ČEZ – záloha energie",          amount:  -1800, icon: "⚡", bg: "#fef9c3" },
+    { date: "1.  2. 2026", name: "Nájem – únor",                  amount: -11500, icon: "🏠", bg: "#fef9c3" },
+  ];
+
+  // ── Render ────────────────────────────────────────────────────────────────
+
+  function fmt(n) {
+    return Math.abs(n).toLocaleString('cs-CZ') + '\u00a0Kč';
+  }
+
+  function render(data, listId, countId) {
+    const list  = document.getElementById(listId);
+    const count = document.getElementById(countId);
+
+    count.textContent = data.length + ' pohybů';
+
+    list.innerHTML = data.map(tx => `
+      <div class="tx">
+        <div class="tx-icon" style="background:${tx.bg}">${tx.icon}</div>
+        <div class="tx-info">
+          <div class="tx-name">${tx.name}</div>
+          <div class="tx-date">${tx.date}</div>
+        </div>
+        <div class="tx-amount ${tx.amount > 0 ? 'in' : 'out'}">
+          ${tx.amount > 0 ? '+' : '−'}${fmt(tx.amount)}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // ── Switch ────────────────────────────────────────────────────────────────
+
+  function switchProfile(who) {
+    const isT = who === 'tomas';
+
+    document.getElementById('tab-tomas').classList.toggle('active', isT);
+    document.getElementById('tab-marketa').classList.toggle('active', !isT);
+
+    document.getElementById('info-tomas').classList.toggle('hidden', !isT);
+    document.getElementById('info-marketa').classList.toggle('hidden', isT);
+
+    document.getElementById('view-tomas').classList.toggle('hidden', !isT);
+    document.getElementById('view-marketa').classList.toggle('hidden', isT);
+
+    // Scroll back to top on switch
+    document.querySelector('.content').scrollTop = 0;
+  }
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+
+  render(TOMAS,   'list-tomas',   'count-tomas');
+  render(MARKETA, 'list-marketa', 'count-marketa');
+</script>
+</body>
+</html>
