@@ -74,7 +74,7 @@
       align-items: center;
       gap: 6px;
     }
-    .bank-name .symbol  { color: var(--lime); font-size: 26px; }
+    .bank-name .symbol   { color: var(--lime); font-size: 26px; }
     .bank-name .wordmark { color: #fff; }
 
     /* ── Profile switcher ── */
@@ -86,7 +86,6 @@
       gap: 4px;
       margin-bottom: 16px;
     }
-
     .switcher button {
       flex: 1;
       border: none;
@@ -119,19 +118,14 @@
     .av-m { background: var(--nøt);   color: var(--black); }
 
     /* ── Account card ── */
-    .account-card {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .account-card { display: flex; align-items: center; gap: 12px; }
     .av-lg {
       width: 50px; height: 50px;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px; font-weight: 900;
-      flex-shrink: 0;
+      font-size: 18px; font-weight: 900; flex-shrink: 0;
     }
-    .account-card h2 { font-size: 18px; font-weight: 800; color: #fff; line-height: 1.2; }
+    .account-card h2  { font-size: 18px; font-weight: 800; color: #fff; }
     .account-card .sub { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 3px; font-weight: 400; }
 
     /* ── Scrollable content ── */
@@ -151,24 +145,20 @@
       padding: 14px 20px 6px;
     }
     .month-label h3 {
-      font-size: 11px; font-weight: 800;
-      color: var(--purple);
+      font-size: 11px; font-weight: 800; color: var(--purple);
       text-transform: uppercase; letter-spacing: 1px;
     }
     .month-label .count { font-size: 11px; color: var(--nøt); font-weight: 600; }
 
     /* ── Transaction list ── */
     .tx-list { padding: 0 12px 12px; }
-
     .tx {
-      display: flex;
-      align-items: center;
+      display: flex; align-items: center;
       padding: 11px 8px;
       border-bottom: 1px solid rgba(103,19,159,0.07);
       gap: 12px;
     }
     .tx:last-child { border-bottom: none; }
-
     .tx-icon {
       width: 42px; height: 42px;
       border-radius: 13px;
@@ -180,8 +170,8 @@
       font-size: 14px; font-weight: 600; color: var(--black);
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-    .tx-date { font-size: 12px; color: var(--nøt); margin-top: 2px; font-weight: 400; }
-    .tx-amount { font-size: 15px; font-weight: 800; flex-shrink: 0; letter-spacing: -0.3px; }
+    .tx-date  { font-size: 12px; color: var(--nøt); margin-top: 2px; font-weight: 400; }
+    .tx-amount { font-size: 15px; font-weight: 800; flex-shrink: 0; }
     .tx-amount.in  { color: var(--purple); }
     .tx-amount.out { color: var(--black); }
 
@@ -194,18 +184,11 @@
       padding: 10px 0 22px;
     }
     .nav-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
       color: rgba(255,255,255,0.3);
       font-family: 'Geologica', sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 0;
+      font-size: 10px; font-weight: 700;
+      cursor: pointer; background: none; border: none; padding: 0;
     }
     .nav-btn .ico { font-size: 22px; }
     .nav-btn.active { color: var(--lime); }
@@ -213,15 +196,12 @@
 
     /* ── Code unlock overlay ── */
     .overlay {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: rgba(14,14,14,0.85);
-      display: flex;
-      align-items: flex-end;
+      display: flex; align-items: flex-end;
       z-index: 100;
       backdrop-filter: blur(4px);
-      border-radius: 48px;
-      overflow: hidden;
+      border-radius: 48px; overflow: hidden;
     }
     .overlay.hidden { display: none; }
 
@@ -231,171 +211,184 @@
       border-radius: 28px 28px 0 0;
       padding: 28px 24px 40px;
     }
-    .code-sheet h3 {
-      font-size: 20px;
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 6px;
-    }
-    .code-sheet p {
-      font-size: 14px;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 24px;
-      font-weight: 400;
-    }
-
-    .code-input-wrap {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
+    .code-sheet h3  { font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 6px; }
+    .code-sheet p   { font-size: 14px; color: rgba(255,255,255,0.45); margin-bottom: 24px; font-weight: 400; }
+    .code-input-wrap { display: flex; gap: 8px; margin-bottom: 12px; }
     .code-input {
       flex: 1;
-      background: #2a2a2a;
-      border: 2px solid #3a3a3a;
-      border-radius: 12px;
+      background: #2a2a2a; border: 2px solid #3a3a3a; border-radius: 12px;
       padding: 14px 16px;
       font-family: 'Geologica', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      outline: none;
+      font-size: 20px; font-weight: 800; color: #fff;
+      letter-spacing: 4px; text-transform: uppercase; outline: none;
       transition: border-color 0.18s;
     }
     .code-input:focus { border-color: var(--lime); }
     .code-input.error { border-color: #ef4444; animation: shake 0.3s; }
-
     @keyframes shake {
       0%,100% { transform: translateX(0); }
       25%      { transform: translateX(-6px); }
       75%      { transform: translateX(6px); }
     }
-
     .code-btn {
-      background: var(--lime);
-      border: none;
-      border-radius: 12px;
+      background: var(--lime); border: none; border-radius: 12px;
       padding: 14px 20px;
       font-family: 'Geologica', sans-serif;
-      font-size: 16px;
-      font-weight: 900;
-      color: var(--black);
-      cursor: pointer;
-      transition: opacity 0.15s;
+      font-size: 16px; font-weight: 900; color: var(--black);
+      cursor: pointer; transition: opacity 0.15s;
     }
     .code-btn:hover { opacity: 0.88; }
-
-    .code-error {
-      font-size: 13px;
-      color: #ef4444;
-      font-weight: 600;
-      min-height: 18px;
-    }
-
+    .code-error { font-size: 13px; color: #ef4444; font-weight: 600; min-height: 18px; }
     .overlay-close {
-      display: block;
-      width: 100%;
-      margin-top: 16px;
-      background: none;
-      border: none;
+      display: block; width: 100%; margin-top: 16px;
+      background: none; border: none;
       font-family: 'Geologica', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.3);
-      cursor: pointer;
-      text-align: center;
+      font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.3);
+      cursor: pointer; text-align: center;
     }
 
-    /* ── Budget view ── */
-    .budget-view { padding: 16px 20px 24px; }
+    /* ══════════════════════════════════
+       BUDGET VIEW
+    ══════════════════════════════════ */
+    .budget-view { padding: 16px 20px 28px; }
 
+    /* ── Summary card ── */
     .budget-summary {
       background: var(--black);
       border-radius: 18px;
-      padding: 18px 20px;
+      padding: 18px 12px;
       margin-bottom: 20px;
       display: flex;
-      gap: 0;
     }
-    .summary-col {
-      flex: 1;
-      text-align: center;
-    }
-    .summary-col + .summary-col {
-      border-left: 1px solid rgba(255,255,255,0.1);
-    }
+    .summary-col { flex: 1; text-align: center; }
+    .summary-col + .summary-col { border-left: 1px solid rgba(255,255,255,0.08); }
     .summary-label {
-      font-size: 10px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.4);
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
+      font-size: 9px; font-weight: 800; color: rgba(255,255,255,0.35);
+      text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 5px;
+    }
+    .summary-value { font-size: 15px; font-weight: 900; letter-spacing: -0.4px; }
+    .summary-value.income    { color: var(--lime); }
+    .summary-value.expense   { color: var(--nøt); }
+    .summary-value.bal-plus  { color: var(--lime); }
+    .summary-value.bal-minus { color: #ef4444; }
+
+    /* ── Section title ── */
+    .section-title {
+      font-size: 11px; font-weight: 800; color: var(--purple);
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 12px; margin-top: 4px;
+    }
+
+    /* ── 50/30/20 block ── */
+    .rule-block {
+      background: #fff;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 20px;
+      border: 1.5px solid rgba(103,19,159,0.08);
+    }
+    .rule-inner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .donut-wrap { flex-shrink: 0; position: relative; width: 110px; height: 110px; }
+    .donut-wrap svg { display: block; }
+    .donut-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      pointer-events: none;
+    }
+    .donut-center .dc-label { font-size: 9px; font-weight: 700; color: var(--nøt); text-transform: uppercase; letter-spacing: 0.5px; }
+    .donut-center .dc-value { font-size: 13px; font-weight: 900; color: var(--black); line-height: 1.1; margin-top: 1px; }
+    .donut-center .dc-value.deficit { color: #ef4444; font-size: 12px; }
+
+    .rule-rows { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+
+    .rule-row {}
+    .rule-row-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 4px;
     }
-    .summary-value {
-      font-size: 16px;
-      font-weight: 900;
-      letter-spacing: -0.5px;
+    .rule-row-label {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 12px; font-weight: 700; color: var(--black);
     }
-    .summary-value.income  { color: var(--lime); }
-    .summary-value.expense { color: var(--nøt); }
-    .summary-value.balance-pos { color: var(--lime); }
-    .summary-value.balance-neg { color: #ef4444; }
+    .rule-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .rule-pcts { text-align: right; }
+    .rule-actual { font-size: 13px; font-weight: 900; color: var(--black); line-height: 1; }
+    .rule-target { font-size: 10px; font-weight: 600; color: var(--nøt); }
 
-    .budget-section-title {
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--purple);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
+    .rule-track {
+      height: 6px;
+      border-radius: 99px;
+      background: rgba(103,19,159,0.08);
+      position: relative;
+      overflow: visible;
+    }
+    .rule-fill {
+      height: 100%;
+      border-radius: 99px;
+    }
+    /* Target marker line */
+    .rule-marker {
+      position: absolute;
+      top: -3px; bottom: -3px;
+      width: 2px;
+      border-radius: 1px;
+      background: rgba(14,14,14,0.25);
     }
 
-    /* ── Bar chart ── */
-    .bar-list { display: flex; flex-direction: column; gap: 12px; }
+    .badge {
+      font-size: 10px; font-weight: 800;
+      padding: 2px 6px; border-radius: 20px; margin-left: 4px;
+    }
+    .badge.ok   { background: rgba(162,230,64,0.2);  color: #3d6e00; }
+    .badge.over { background: rgba(239,68,68,0.12);  color: #b91c1c; }
+    .badge.low  { background: rgba(239,68,68,0.12);  color: #b91c1c; }
 
-    .bar-row { display: flex; flex-direction: column; gap: 4px; }
+    /* ── Category bars ── */
+    .cat-block { margin-bottom: 18px; }
+    .cat-block-title {
+      font-size: 10px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.8px;
+      margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+    }
+    .cat-block-title .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
 
+    .bar-list { display: flex; flex-direction: column; gap: 10px; }
+    .bar-row  {}
     .bar-meta {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
+      margin-bottom: 4px;
     }
-    .bar-cat {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--black);
-    }
-    .bar-amount {
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--black);
-    }
+    .bar-cat    { font-size: 13px; font-weight: 700; color: var(--black); }
+    .bar-amount { font-size: 12px; font-weight: 800; color: var(--black); }
+    .bar-track  { height: 8px; background: rgba(103,19,159,0.08); border-radius: 99px; overflow: hidden; }
+    .bar-fill   { height: 100%; border-radius: 99px; }
 
-    .bar-track {
-      height: 10px;
-      background: rgba(103,19,159,0.1);
-      border-radius: 99px;
-      overflow: hidden;
-    }
-    .bar-fill {
-      height: 100%;
-      border-radius: 99px;
-      transition: width 0.6s cubic-bezier(.4,0,.2,1);
-    }
-
-    /* ── Hidden util ── */
+    /* ── Hidden ── */
     .hidden { display: none !important; }
 
     /* ── Responsive ── */
     @media (max-width: 440px) {
       body { padding: 0; background: #faf8fd; }
-      .phone {
-        width: 100%; border-radius: 0;
-        box-shadow: none; height: 100dvh;
-      }
+      .phone { width: 100%; border-radius: 0; box-shadow: none; height: 100dvh; }
       .overlay { border-radius: 0; }
     }
   </style>
@@ -411,13 +404,12 @@
     <span>&#9679;&#9679;&#9679;&#9679;</span>
   </div>
 
-  <!-- App header (always visible) -->
+  <!-- App header -->
   <div class="app-header">
     <div class="bank-name">
       <span class="symbol">ø</span>
       <span class="wordmark">Nekrachni</span>
     </div>
-
     <div class="switcher">
       <button id="tab-tomas" class="active" onclick="switchProfile('tomas')">
         <span class="av av-t">TN</span>Tomáš
@@ -426,7 +418,6 @@
         <span class="av av-m">MK</span>Markéta
       </button>
     </div>
-
     <div class="account-card" id="info-tomas">
       <div class="av-lg av-t">TN</div>
       <div>
@@ -446,33 +437,19 @@
   <!-- Scrollable content -->
   <div class="content">
 
-    <!-- ══ POHYBY – Tomáš ══ -->
+    <!-- ══ POHYBY ══ -->
     <div id="pohyby-tomas">
-      <div class="month-label">
-        <h3>Únor 2026</h3>
-        <span class="count" id="count-tomas"></span>
-      </div>
+      <div class="month-label"><h3>Únor 2026</h3><span class="count" id="count-tomas"></span></div>
       <div class="tx-list" id="list-tomas"></div>
     </div>
-
-    <!-- ══ POHYBY – Markéta ══ -->
     <div id="pohyby-marketa" class="hidden">
-      <div class="month-label">
-        <h3>Únor 2026</h3>
-        <span class="count" id="count-marketa"></span>
-      </div>
+      <div class="month-label"><h3>Únor 2026</h3><span class="count" id="count-marketa"></span></div>
       <div class="tx-list" id="list-marketa"></div>
     </div>
 
-    <!-- ══ ROZPOČET – Tomáš ══ -->
-    <div id="rozpocet-tomas" class="hidden">
-      <div class="budget-view" id="budget-content-tomas"></div>
-    </div>
-
-    <!-- ══ ROZPOČET – Markéta ══ -->
-    <div id="rozpocet-marketa" class="hidden">
-      <div class="budget-view" id="budget-content-marketa"></div>
-    </div>
+    <!-- ══ ROZPOČET ══ -->
+    <div id="rozpocet-tomas"   class="hidden"><div class="budget-view" id="bv-tomas"></div></div>
+    <div id="rozpocet-marketa" class="hidden"><div class="budget-view" id="bv-marketa"></div></div>
 
   </div>
 
@@ -498,18 +475,10 @@
       <h3>Zadej kód lektora</h3>
       <p>Kód najdeš na tabuli nebo v materiálech k workshopu.</p>
       <div class="code-input-wrap">
-        <input
-          class="code-input"
-          id="code-input"
-          type="text"
-          maxlength="5"
-          placeholder="XXXXX"
-          autocomplete="off"
-          autocorrect="off"
-          spellcheck="false"
+        <input class="code-input" id="code-input" type="text" maxlength="5"
+          placeholder="XXXXX" autocomplete="off" autocorrect="off" spellcheck="false"
           oninput="this.value=this.value.toUpperCase()"
-          onkeydown="if(event.key==='Enter') checkCode()"
-        >
+          onkeydown="if(event.key==='Enter') checkCode()">
         <button class="code-btn" onclick="checkCode()">OK</button>
       </div>
       <div class="code-error" id="code-error"></div>
@@ -520,7 +489,7 @@
 </div>
 
 <script>
-  // ── State ─────────────────────────────────────────────────────────────────
+  // ── State ──────────────────────────────────────────────────────────────────
   let activeProfile = 'tomas';
   let activeTab     = 'pohyby';
   let unlocked      = false;
@@ -580,41 +549,223 @@
   // ── Budget data ────────────────────────────────────────────────────────────
   const BUDGET = {
     tomas: {
-      income:  12300,
-      expense: 11864,
-      cats: [
-        { name: "Bydlení",          amount: 5500, color: "#67139F" },
-        { name: "Potraviny",        amount: 2235, color: "#A2E640" },
-        { name: "Zábava",           amount: 1157, color: "#AD8CCB" },
-        { name: "Oblečení",         amount:  699, color: "#c084fc" },
-        { name: "Vzdělání",         amount:  474, color: "#818cf8" },
-        { name: "Doprava",          amount:  550, color: "#60a5fa" },
-        { name: "Stravování venku", amount:  415, color: "#f97316" },
-        { name: "Telefon",          amount:  399, color: "#34d399" },
-        { name: "Dárky",            amount:  250, color: "#f472b6" },
-        { name: "Zdraví",           amount:  185, color: "#fb923c" },
-      ]
+      income: 12300,
+      needs: {
+        total: 8869,
+        color: '#67139F',
+        cats: [
+          { name: "Bydlení (nájem)",  amount: 5500, color: "#67139F" },
+          { name: "Potraviny",        amount: 2235, color: "#9333ea" },
+          { name: "Doprava (MHD)",    amount:  550, color: "#60a5fa" },
+          { name: "Telefon (O2)",     amount:  399, color: "#34d399" },
+          { name: "Zdraví",           amount:  185, color: "#fb923c" },
+        ]
+      },
+      wants: {
+        total: 2995,
+        color: '#A2E640',
+        cats: [
+          { name: "Zábava",           amount: 1157, color: "#A2E640" },
+          { name: "Oblečení",         amount:  699, color: "#c084fc" },
+          { name: "Vzdělání & knihy", amount:  474, color: "#818cf8" },
+          { name: "Stravování venku", amount:  415, color: "#f97316" },
+          { name: "Dárky",            amount:  250, color: "#f472b6" },
+        ]
+      }
     },
     marketa: {
-      income:  23500,
-      expense: 23625,
-      cats: [
-        { name: "Bydlení",            amount: 13300, color: "#67139F" },
-        { name: "Potraviny",          amount:  3500, color: "#A2E640" },
-        { name: "Oblečení",           amount:  1290, color: "#c084fc" },
-        { name: "Zdraví & krása",     amount:  1160, color: "#AD8CCB" },
-        { name: "Stravování venku",   amount:  1110, color: "#f97316" },
-        { name: "Telefon & internet", amount:  1148, color: "#34d399" },
-        { name: "Sport",              amount:   799, color: "#818cf8" },
-        { name: "Zábava",             amount:   768, color: "#60a5fa" },
-        { name: "Doprava",            amount:   550, color: "#f472b6" },
-      ]
+      income: 23500,
+      needs: {
+        total: 18588,
+        color: '#67139F',
+        cats: [
+          { name: "Bydlení (nájem)",      amount: 11500, color: "#67139F" },
+          { name: "Potraviny",            amount:  3500, color: "#9333ea" },
+          { name: "Energie (ČEZ)",        amount:  1800, color: "#7c3aed" },
+          { name: "Telefon & internet",   amount:  1148, color: "#34d399" },
+          { name: "Doprava (MHD)",        amount:   550, color: "#60a5fa" },
+          { name: "Zdraví",               amount:    90, color: "#fb923c" },
+        ]
+      },
+      wants: {
+        total: 5037,
+        color: '#A2E640',
+        cats: [
+          { name: "Oblečení",          amount: 1290, color: "#A2E640" },
+          { name: "Stravování venku",  amount: 1110, color: "#f97316" },
+          { name: "Zdraví & krása",    amount: 1070, color: "#AD8CCB" },
+          { name: "Sport (gym)",       amount:  799, color: "#818cf8" },
+          { name: "Zábava",            amount:  768, color: "#c084fc" },
+        ]
+      }
     }
   };
 
   // ── Helpers ────────────────────────────────────────────────────────────────
   function fmt(n) {
     return Math.abs(n).toLocaleString('cs-CZ') + '\u00a0Kč';
+  }
+  function pct(val, total) {
+    return Math.round((val / total) * 100);
+  }
+
+  // ── Donut SVG ──────────────────────────────────────────────────────────────
+  function donutSVG(segments) {
+    // segments: [{pct: 0..1, color}]  (pct values must sum ≤ 1)
+    const cx = 55, cy = 55, r = 42, sw = 14;
+    const C = 2 * Math.PI * r;
+    const GAP = 2.5;
+
+    let cumulative = 0;
+    const arcs = segments.filter(s => s.pct > 0.005).map(s => {
+      const dash   = Math.max(0, s.pct * C - GAP);
+      const offset = -(cumulative * C);
+      cumulative  += s.pct;
+      return `<circle cx="${cx}" cy="${cy}" r="${r}"
+        fill="none" stroke="${s.color}" stroke-width="${sw}"
+        stroke-dasharray="${dash.toFixed(2)} ${(C - dash).toFixed(2)}"
+        stroke-dashoffset="${offset.toFixed(2)}"
+        transform="rotate(-90 ${cx} ${cy})"
+        stroke-linecap="butt"/>`;
+    }).join('\n    ');
+
+    return `<svg viewBox="0 0 110 110" width="110" height="110">
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none"
+      stroke="rgba(103,19,159,0.07)" stroke-width="${sw}"/>
+    ${arcs}
+  </svg>`;
+  }
+
+  // ── Badge helper ───────────────────────────────────────────────────────────
+  function badge(actual, target) {
+    const diff = actual - target;
+    if (Math.abs(diff) <= 3) return `<span class="badge ok">✓ OK</span>`;
+    if (diff > 0)            return `<span class="badge over">↑ +${diff}%</span>`;
+    return                          `<span class="badge low">↓ ${diff}%</span>`;
+  }
+
+  // ── Render budget ──────────────────────────────────────────────────────────
+  function renderBudget(profile) {
+    const b       = BUDGET[profile];
+    const income  = b.income;
+    const needsAmt  = b.needs.total;
+    const wantsAmt  = b.wants.total;
+    const savingsAmt = income - needsAmt - wantsAmt;
+    const isDeficit  = savingsAmt < 0;
+
+    const needsPct_r   = needsAmt  / income;
+    const wantsPct_r   = wantsAmt  / income;
+    const savingsPct_r = Math.max(0, savingsAmt / income);
+
+    const needsPct_d   = Math.round(needsPct_r   * 100);
+    const wantsPct_d   = Math.round(wantsPct_r   * 100);
+    const savingsPct_d = isDeficit ? 0 : Math.round(savingsPct_r * 100);
+
+    // Donut segments
+    const total_d = needsPct_r + wantsPct_r + savingsPct_r;
+    const segments = [
+      { pct: needsPct_r  / total_d, color: '#67139F' },
+      { pct: wantsPct_r  / total_d, color: '#A2E640' },
+      { pct: savingsPct_r / total_d, color: '#AD8CCB' },
+    ];
+
+    // Center label
+    const centerHTML = isDeficit
+      ? `<div class="dc-label">zůstatek</div><div class="dc-value deficit">DEFICIT<br>${fmt(Math.abs(savingsAmt))}</div>`
+      : `<div class="dc-label">spoření</div><div class="dc-value">${savingsPct_d}%<br><span style="font-size:10px;color:var(--nøt)">${fmt(savingsAmt)}</span></div>`;
+
+    // Rule rows
+    function ruleRow(label, dot, actual, target) {
+      const barW = Math.min(100, actual);
+      const markW = Math.min(100, target);
+      return `
+        <div class="rule-row">
+          <div class="rule-row-top">
+            <div class="rule-row-label">
+              <div class="rule-dot" style="background:${dot}"></div>
+              ${label}
+            </div>
+            <div class="rule-pcts">
+              <div class="rule-actual">${actual}% ${badge(actual, target)}</div>
+              <div class="rule-target">cíl: ${target}%</div>
+            </div>
+          </div>
+          <div class="rule-track">
+            <div class="rule-fill" style="width:${barW}%; background:${dot}; opacity:0.85"></div>
+            <div class="rule-marker" style="left:${markW}%"></div>
+          </div>
+        </div>`;
+    }
+
+    // Category bars
+    function catBars(cats) {
+      const max = Math.max(...cats.map(c => c.amount));
+      return cats.map(c => `
+        <div class="bar-row">
+          <div class="bar-meta">
+            <span class="bar-cat">${c.name}</span>
+            <span class="bar-amount">${fmt(c.amount)}</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:${Math.round(c.amount/max*100)}%; background:${c.color}"></div>
+          </div>
+        </div>`).join('');
+    }
+
+    const balClass = isDeficit ? 'bal-minus' : 'bal-plus';
+    const balSign  = isDeficit ? '−' : '+';
+
+    document.getElementById(`bv-${profile}`).innerHTML = `
+      <!-- Summary -->
+      <div class="budget-summary">
+        <div class="summary-col">
+          <div class="summary-label">Příjmy</div>
+          <div class="summary-value income">+${fmt(income)}</div>
+        </div>
+        <div class="summary-col">
+          <div class="summary-label">Výdaje</div>
+          <div class="summary-value expense">−${fmt(needsAmt + wantsAmt)}</div>
+        </div>
+        <div class="summary-col">
+          <div class="summary-label">Zůstatek</div>
+          <div class="summary-value ${balClass}">${balSign}${fmt(Math.abs(savingsAmt))}</div>
+        </div>
+      </div>
+
+      <!-- 50/30/20 -->
+      <div class="section-title">Pravidlo 50 / 30 / 20</div>
+      <div class="rule-block">
+        <div class="rule-inner">
+          <div class="donut-wrap">
+            ${donutSVG(segments)}
+            <div class="donut-center">${centerHTML}</div>
+          </div>
+          <div class="rule-rows">
+            ${ruleRow('Nezbytné', '#67139F', needsPct_d,  50)}
+            ${ruleRow('Zbytné',   '#A2E640', wantsPct_d,  30)}
+            ${ruleRow('Spoření',  '#AD8CCB', savingsPct_d, 20)}
+          </div>
+        </div>
+      </div>
+
+      <!-- Nezbytné výdaje -->
+      <div class="cat-block">
+        <div class="cat-block-title" style="color:#67139F">
+          <div class="dot" style="background:#67139F"></div>
+          Nezbytné výdaje &nbsp;·&nbsp; ${fmt(needsAmt)}
+        </div>
+        <div class="bar-list">${catBars(b.needs.cats)}</div>
+      </div>
+
+      <!-- Zbytné výdaje -->
+      <div class="cat-block">
+        <div class="cat-block-title" style="color:#3d6e00">
+          <div class="dot" style="background:#A2E640"></div>
+          Zbytné výdaje &nbsp;·&nbsp; ${fmt(wantsAmt)}
+        </div>
+        <div class="bar-list">${catBars(b.wants.cats)}</div>
+      </div>
+    `;
   }
 
   // ── Render transactions ────────────────────────────────────────────────────
@@ -630,77 +781,25 @@
         <div class="tx-amount ${tx.amount > 0 ? 'in' : 'out'}">
           ${tx.amount > 0 ? '+' : '−'}${fmt(tx.amount)}
         </div>
-      </div>
-    `).join('');
+      </div>`).join('');
   }
 
-  // ── Render budget ──────────────────────────────────────────────────────────
-  function renderBudget(profile) {
-    const b       = BUDGET[profile];
-    const balance = b.income - b.expense;
-    const maxAmt  = Math.max(...b.cats.map(c => c.amount));
-    const balClass = balance >= 0 ? 'balance-pos' : 'balance-neg';
-    const balSign  = balance >= 0 ? '+' : '−';
-
-    const bars = b.cats.map(c => {
-      const pct = Math.round((c.amount / maxAmt) * 100);
-      return `
-        <div class="bar-row">
-          <div class="bar-meta">
-            <span class="bar-cat">${c.name}</span>
-            <span class="bar-amount">${fmt(c.amount)}</span>
-          </div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:${pct}%; background:${c.color}"></div>
-          </div>
-        </div>
-      `;
-    }).join('');
-
-    document.getElementById(`budget-content-${profile}`).innerHTML = `
-      <div class="budget-summary">
-        <div class="summary-col">
-          <div class="summary-label">Příjmy</div>
-          <div class="summary-value income">+${fmt(b.income)}</div>
-        </div>
-        <div class="summary-col">
-          <div class="summary-label">Výdaje</div>
-          <div class="summary-value expense">−${fmt(b.expense)}</div>
-        </div>
-        <div class="summary-col">
-          <div class="summary-label">Zůstatek</div>
-          <div class="summary-value ${balClass}">${balSign}${fmt(Math.abs(balance))}</div>
-        </div>
-      </div>
-      <div class="budget-section-title">Výdaje podle kategorií</div>
-      <div class="bar-list">${bars}</div>
-    `;
-  }
-
-  // ── Show/hide panels ───────────────────────────────────────────────────────
+  // ── View management ────────────────────────────────────────────────────────
   function updateView() {
-    const profiles = ['tomas', 'marketa'];
-    const tabs     = ['pohyby', 'rozpocet'];
-
-    profiles.forEach(p => {
-      tabs.forEach(t => {
+    ['tomas','marketa'].forEach(p => {
+      ['pohyby','rozpocet'].forEach(t => {
         const el = document.getElementById(`${t}-${p}`);
-        if (el) el.classList.toggle('hidden',
-          !(p === activeProfile && t === activeTab));
+        if (el) el.classList.toggle('hidden', !(p === activeProfile && t === activeTab));
       });
+      document.getElementById(`info-${p}`).classList.toggle('hidden', p !== activeProfile);
+      document.getElementById(`tab-${p}`).classList.toggle('active', p === activeProfile);
     });
 
-    document.getElementById('info-tomas').classList.toggle('hidden',   activeProfile !== 'tomas');
-    document.getElementById('info-marketa').classList.toggle('hidden', activeProfile !== 'marketa');
-
-    document.getElementById('tab-tomas').classList.toggle('active',   activeProfile === 'tomas');
-    document.getElementById('tab-marketa').classList.toggle('active', activeProfile === 'marketa');
-
-    document.getElementById('nav-pohyby').classList.toggle('active',  activeTab === 'pohyby');
+    document.getElementById('nav-pohyby').classList.toggle('active', activeTab === 'pohyby');
 
     const navR = document.getElementById('nav-rozpocet');
-    navR.classList.toggle('active',  unlocked && activeTab === 'rozpocet');
-    navR.classList.toggle('locked',  !unlocked);
+    navR.classList.toggle('active', unlocked && activeTab === 'rozpocet');
+    navR.classList.toggle('locked', !unlocked);
     navR.innerHTML = unlocked
       ? '<span class="ico">&#128200;</span>Rozpočet'
       : '<span class="ico">&#128274;</span>Rozpočet';
@@ -708,19 +807,9 @@
     document.querySelector('.content').scrollTop = 0;
   }
 
-  // ── Switch profile ─────────────────────────────────────────────────────────
-  function switchProfile(profile) {
-    activeProfile = profile;
-    updateView();
-  }
+  function switchProfile(profile) { activeProfile = profile; updateView(); }
+  function switchTab(tab)         { activeTab = tab;          updateView(); }
 
-  // ── Switch tab ─────────────────────────────────────────────────────────────
-  function switchTab(tab) {
-    activeTab = tab;
-    updateView();
-  }
-
-  // ── Rozpočet click ─────────────────────────────────────────────────────────
   function handleRozpocetClick() {
     if (unlocked) {
       switchTab('rozpocet');
@@ -732,11 +821,9 @@
     }
   }
 
-  // ── Code check ─────────────────────────────────────────────────────────────
   function checkCode() {
     const input = document.getElementById('code-input');
     const error = document.getElementById('code-error');
-
     if (input.value.trim() === SECRET_CODE) {
       unlocked = true;
       document.getElementById('overlay').classList.add('hidden');
@@ -749,9 +836,7 @@
     }
   }
 
-  function closeOverlay() {
-    document.getElementById('overlay').classList.add('hidden');
-  }
+  function closeOverlay() { document.getElementById('overlay').classList.add('hidden'); }
 
   // ── Init ───────────────────────────────────────────────────────────────────
   renderTx(TOMAS,   'list-tomas',   'count-tomas');
